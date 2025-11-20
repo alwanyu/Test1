@@ -1,2 +1,2 @@
-# Teste
-This is a test project
+# Test project repo
+This is a test project repository
