@@ -1,0 +1,153 @@
+# 1st Description:
+#A vending machine program that allows users to choose snacks/drinks, view prices, and print a receipt.
+#Key Skills: loops, input(), conditionals, lists/dictionaries, sum(), formatting
+#Python Code:
+items = {"1": ("Chips", 20), "2": ("Soda", 15), "3": ("Water", 10)}
+cart = []
+print("Welcome to the vending machine!")
+for k, v in items.items():
+    print(f"{k}. {v[0]} - ${v[1]}")
+while True:
+    choice = input("Choose item number (or 'done'): ")
+    if choice.lower() == "done":
+        break
+    elif choice in items:
+        cart.append(items[choice])
+    else:
+        print("Invalid choice.")
+print("\nReceipt:")
+total = sum(price for _, price in cart)
+for item, price in cart:
+    print(f"{item} - ${price}")
+print(f"Total: ${total}")
+
+
+# 2nd Description: 
+#A grocery checkout system using a dictionary of items and prices.
+#Key Skills: dictionaries, loops, input(), math operations, error handling
+#Python Code:
+groceries = {"apple": 5, "banana": 3, "milk": 10}
+cart = {}
+while True:
+    item = input("Add item or 'checkout': ").lower()
+    if item == "checkout":
+        break
+    if item in groceries:
+        qty = int(input(f"How many {item}s? "))
+        cart[item] = cart.get(item, 0) + qty
+    else:
+        print("Item not found.")
+print("\nReceipt:")
+total = 0
+for item, qty in cart.items():
+    subtotal = groceries[item] * qty
+    print(f"{item} x{qty} = ${subtotal}")
+    total += subtotal
+print(f"Total: ${total}")
+
+
+# 3rd Description:
+# To-Do List App (Text-Based) 3rd question
+# Skills practiced: lists, string parsing, loops, input, CRUD basics (CRUD = Create, Read, Update, Delete)
+
+tasks = []  # list to store all tasks
+completed_tasks = []  # list to store completed tasks
+
+print("Welcome to Your To-Do List App")
+print("Type: add / view / done / delete / exit\n")
+
+while True:
+    action = input("Enter action: ").strip().lower()  # strip() removes extra spaces; lower() standardizes input
+
+    # Add a new task
+    if action == "add":
+        task_input = input("Enter task: ")
+        tasks.append(task_input)
+        print(f"Task added: {task_input}\n")
+
+    # View all tasks
+    elif action == "view":
+        if not tasks:
+            print("No tasks in your list.\n")
+        else:
+            print("\nCurrent Tasks:")
+            for i, task in enumerate(tasks, start=1):
+                print(f"{i}. {task}")
+            print()
+
+    # Mark a task as completed
+    elif action == "done":
+        if not tasks:
+            print("No tasks to mark as done.\n")
+        else:
+            num = int(input("Enter task number to mark complete: ")) - 1
+            if 0 <= num < len(tasks):
+                completed_tasks.append(tasks[num])
+                print(f"Marked as done: {tasks[num]}\n")
+                tasks.pop(num)
+            else:
+                print("Invalid task number.\n")
+
+    # Delete a task
+    elif action == "delete":
+        if not tasks:
+            print("No tasks to delete.\n")
+        else:
+            num = int(input("Enter task number to delete: ")) - 1
+            if 0 <= num < len(tasks):
+                print(f"Deleted: {tasks[num]}\n")
+                tasks.pop(num)
+            else:
+                print("Invalid task number.\n")
+
+    # Exit the program
+    elif action == "exit":
+        break
+
+    else:
+        print("Invalid command! Try again.\n")
+
+# Summary at the end
+print("\n To-Do List Summary")
+print(f"Completed tasks: {len(completed_tasks)}")
+print(f"Pending tasks: {len(tasks)}")
+print("Goodbye!")
+
+
+
+# 4th Description:
+#Simulate booking movie tickets and calculating total cost.
+#Key Skills: nested dictionaries, loops, input(), math operations
+#Python Code:
+movies = {
+    "1": {"title": "Avatar 2", "price": 12},
+    "2": {"title": "Oppenheimer", "price": 15}
+}
+total_cost = 0
+while True:
+    for k, v in movies.items():
+        print(f"{k}. {v['title']} - ${v['price']}")
+    choice = input("Choose movie or 'no': ")
+    if choice == "no":
+        break
+    num = int(input("Tickets: "))
+    total_cost += movies[choice]["price"] * num
+print(f"Total booking cost: ${total_cost}")
+
+# 5th Description:
+# A simple quiz that asks multiple questions and tracks score.
+
+# Key Skills: dictionaries, loops, conditionals, counters
+
+# Python Code:
+quiz = {
+    "Capital of France?": "paris",
+    "2 + 2 = ?": "4",
+    "Color of sky?": "blue"
+}
+score = 0
+for q, a in quiz.items():
+    ans = input(q + " ").lower()
+    if ans == a:
+        score += 1
+print(f"Your score: {score}/{len(quiz)}")
